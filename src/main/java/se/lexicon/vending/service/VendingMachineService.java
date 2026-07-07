@@ -4,6 +4,7 @@ import se.lexicon.vending.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class VendingMachineService implements VendingMachine {
 
@@ -54,9 +55,6 @@ public class VendingMachineService implements VendingMachine {
         balance -= product.getPrice();
         product.reduceQuantity();
 
-        // Automatically return remaining change
-        returnChange();
-
         return product;
     }
 
@@ -75,7 +73,7 @@ public class VendingMachineService implements VendingMachine {
 
     @Override
     public List<Product> getProducts() {
-        return products;
+        return Collections.unmodifiableList(products);
     }
 
     private Product findProduct(int id) {
